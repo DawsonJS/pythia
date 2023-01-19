@@ -2,7 +2,28 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
 
-(add-to-list 'load-path "~/.emacs.d")
+;; Comment out if you've already loaded this package...
+(require 'cl-lib)
+
+(defvar my-packages
+  '(zenburn-theme org goto-chg undo-fu evil)
+  "A list of packages to ensure are installed at launch.")
+
+(defun my-packages-installed-p ()
+  (cl-loop for p in my-packages
+           when (not (package-installed-p p)) do (cl-return nil)
+           finally (cl-return t)))
+
+(unless (my-packages-installed-p)
+  ;; check for new packages (package versions)
+  (package-refresh-contents)
+  ;; install the missing packages
+  (dolist (p my-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
+
+(require 'zenburn-theme)
+(load-theme 'zenburn t)
 
 (require 'org)
 (require 'goto-chg)
@@ -12,3 +33,15 @@
 (evil-mode 1)
 (setq inhibit-startup-message t  ; Don't show the splash screen
       visible-bell t)            ; Flash when the bell rings
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(evil undo-fu org org-roam goto-chg)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
