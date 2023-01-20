@@ -33,7 +33,8 @@
 (setq-default indent-tabs-mode nil)
 (evil-mode 1)
 (setq inhibit-startup-message t  ; Don't show the splash screen
-      visible-bell t)            ; Flash when the bell rings
+      visible-bell t             ; Flash when the bell rings
+      initial-scratch-message nil) 
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
