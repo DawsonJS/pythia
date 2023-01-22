@@ -34,10 +34,12 @@
 (evil-mode 1)
 (setq inhibit-startup-message t  ; Don't show the splash screen
       visible-bell t             ; Flash when the bell rings
-      initial-scratch-message nil) 
+      initial-scratch-message nil
+      default-directory "~/")
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(transient-mark-mode 1)
 
 ;; Display line numbers in every buffer
 (global-display-line-numbers-mode 1)
